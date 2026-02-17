@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyntaxLab Academy</title>
+    <meta name="description" content="Formation professionnelle en développement web et virtualisation à Abidjan. SyntaxLab Academy.">
+    <meta name="keywords" content="formation développement web, formation informatique Abidjan, virtualisation, SyntaxLab Academy">
+    <meta name="author" content="SyntaxLab Academy">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="./logo.jpeg">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--blue:#2563eb;--dark-blue:#1e3a8a;--light-blue:#60a5fa;--accent:#0ea5e9;--dark:#0f172a;--gray:#64748b;--light:#f1f5f9;--white:#fff}
+        body{font-family:'DM Sans',sans-serif;line-height:1.6;color:var(--dark);overflow-x:hidden;background:var(--white)}
+        h1,h2,h3,h4{font-family:'Syne',sans-serif;font-weight:800;line-height:1.2}
+
+        /* Header */
+        header{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:1rem 5%;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,.05);animation:slideDown .6s ease-out}
+        @keyframes slideDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+        nav{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto}
+        .logo{display:flex;align-items:center;gap:12px;font-size:1.5rem;font-weight:800;color:var(--dark-blue);font-family:'Syne',sans-serif;text-decoration:none}
+        .logo-icon{width:50px;height:50px;border-radius:50%;overflow:hidden;box-shadow:0 4px 15px rgba(37,99,235,.3);animation:pulse 2s ease-in-out infinite;flex-shrink:0}
+        .logo-icon img{width:100%;height:100%;object-fit:cover}
+        @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+        .nav-links{display:flex;gap:2.5rem;list-style:none}
+        .nav-links a{color:var(--dark);text-decoration:none;font-weight:500;transition:color .3s;position:relative}
+        .nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:2px;background:var(--blue);transition:width .3s}
+        .nav-links a:hover::after{width:100%}
+        .nav-links a:hover{color:var(--blue)}
+
+        /* Menu burger mobile */
+        .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:5px}
+        .burger span{width:25px;height:3px;background:var(--dark);border-radius:3px;transition:.3s}
+
+        /* Hero */
+        .hero{margin-top:80px;min-height:90vh;display:flex;align-items:center;padding:4rem 5%;background:linear-gradient(135deg,#0f172a,#1e293b 50%,#334155);position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 50%,rgba(37,99,235,.15),transparent 50%),radial-gradient(circle at 80% 80%,rgba(14,165,233,.1),transparent 50%)}
+        .hero-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;width:100%}
+        .hero-text h1{font-size:3.5rem;color:var(--white);margin-bottom:1.5rem;animation:fadeUp .8s ease-out .2s both}
+        .hero-text h1 .highlight{background:linear-gradient(135deg,var(--light-blue),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .hero-text p{font-size:1.2rem;color:#cbd5e1;margin-bottom:2.5rem;line-height:1.8;animation:fadeUp .8s ease-out .4s both}
+        .cta-buttons{display:flex;gap:1.5rem;animation:fadeUp .8s ease-out .6s both;flex-wrap:wrap}
+        .btn{padding:1rem 2.5rem;border-radius:50px;text-decoration:none;font-weight:600;font-size:1.05rem;transition:all .3s;display:inline-block;border:none;cursor:pointer;text-align:center}
+        .btn-primary{background:linear-gradient(135deg,var(--blue),var(--accent));color:var(--white);box-shadow:0 10px 30px rgba(37,99,235,.4)}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 40px rgba(37,99,235,.6)}
+        .btn-secondary{background:rgba(255,255,255,.1);color:var(--white);backdrop-filter:blur(10px);border:2px solid rgba(255,255,255,.3)}
+        .btn-secondary:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.5);transform:translateY(-3px)}
+
+        /* Hero image */
+        .hero-visual{display:flex;justify-content:center;align-items:center;animation:fadeRight .8s ease-out .3s both}
+        @keyframes fadeRight{from{opacity:0;transform:translateX(50px)}to{opacity:1;transform:translateX(0)}}
+        .hero-image{width:420px;height:420px;border-radius:30px;overflow:hidden;box-shadow:0 30px 80px rgba(37,99,235,.4);max-width:100%}
+        .hero-image img{width:100%;height:100%;object-fit:cover}
+
+        /* Features */
+        .features{padding:6rem 5%;background:var(--light)}
+        .section-header{text-align:center;max-width:800px;margin:0 auto 4rem}
+        .section-header h2{font-size:2.8rem;color:var(--dark);margin-bottom:1rem}
+        .section-header p{font-size:1.15rem;color:var(--gray)}
+        .features-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+        .feature-card{background:var(--white);padding:2.5rem;border-radius:20px;box-shadow:0 5px 30px rgba(0,0,0,.08);transition:all .3s;border:2px solid transparent}
+        .feature-card:hover{transform:translateY(-10px);box-shadow:0 15px 50px rgba(37,99,235,.15);border-color:var(--blue)}
+        .feature-icon{width:70px;height:70px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1.5rem;box-shadow:0 10px 30px rgba(37,99,235,.3)}
+        .feature-card h3{font-size:1.4rem;color:var(--dark);margin-bottom:.8rem}
+        .feature-card p{color:var(--gray);line-height:1.8}
+
+        /* Program */
+        .program{padding:6rem 5%;background:var(--white)}
+        .program-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+        .program-list{list-style:none}
+        .program-item{padding:1.5rem;margin-bottom:1rem;background:var(--light);border-radius:15px;border-left:4px solid var(--blue);transition:all .3s}
+        .program-item:hover{transform:translateX(10px);background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(14,165,233,.1))}
+        .program-item h4{font-size:1.25rem;color:var(--dark);margin-bottom:.3rem}
+        .program-item p{color:var(--gray)}
+        .program-visual{background:linear-gradient(135deg,var(--blue),var(--dark-blue));padding:3rem;border-radius:30px;color:var(--white);box-shadow:0 20px 60px rgba(37,99,235,.3)}
+        .program-visual h3{font-size:2rem;margin-bottom:2rem}
+        .stats{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+        .stat-item{text-align:center;padding:1.5rem;background:rgba(255,255,255,.1);border-radius:15px}
+        .stat-number{font-size:2.5rem;font-weight:800;display:block;margin-bottom:.3rem}
+        .stat-label{font-size:.95rem;opacity:.9}
+
+        /* Contact */
+        .contact{padding:6rem 5%;background:linear-gradient(135deg,#0f172a,#1e293b);color:var(--white)}
+        .contact-content{max-width:1000px;margin:0 auto;text-align:center}
+        .contact-content h2{font-size:2.8rem;margin-bottom:1.5rem;color:var(--white)}
+        .contact-content>p{font-size:1.2rem;color:#cbd5e1;margin-bottom:3rem}
+        .contact-methods{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-bottom:3rem}
+        .contact-item{background:rgba(255,255,255,.1);padding:1.5rem 2rem;border-radius:15px;border:2px solid rgba(255,255,255,.2);transition:all .3s}
+        .contact-item:hover{background:rgba(255,255,255,.15);transform:translateY(-5px)}
+        .contact-item strong{display:block;margin-bottom:.5rem;font-size:.9rem;opacity:.8}
+        .contact-item span{font-size:1.1rem;font-weight:600}
+
+        footer{background:var(--dark);color:#94a3b8;padding:2.5rem 5%;text-align:center}
+
+        /* ===== RESPONSIVE - Tous écrans ===== */
+
+        /* Grand écran / desktop large */
+        @media(max-width:1200px){
+            .hero-text h1{font-size:3rem}
+            .hero-image{width:360px;height:360px}
+            .hero-content{gap:3rem}
+            .section-header h2{font-size:2.5rem}
+        }
+
+        /* Tablette paysage / petit desktop */
+        @media(max-width:968px){
+            .hero-content,.program-content{grid-template-columns:1fr}
+            .hero-text h1{font-size:2.5rem}
+            .nav-links{
+                display:none;
+                position:absolute;
+                top:100%;
+                left:0;
+                right:0;
+                flex-direction:column;
+                background:var(--white);
+                padding:2rem;
+                gap:1.5rem;
+                box-shadow:0 10px 30px rgba(0,0,0,.1);
+                text-align:center
+            }
+            .nav-links.active{display:flex}
+            .burger{display:flex}
+            .hero-image{width:320px;height:320px}
+            .features-grid{grid-template-columns:1fr}
+            .section-header h2{font-size:2.2rem}
+            .hero-visual{order:-1}
+            .hero{min-height:auto;padding:3rem 5%}
+            .hero-text{text-align:center}
+            .cta-buttons{justify-content:center}
+            .program-visual{margin-top:1rem}
+            .contact-content h2{font-size:2.2rem}
+            .stat-number{font-size:2rem}
+        }
+
+        /* Tablette portrait */
+        @media(max-width:768px){
+            .hero-text h1{font-size:2.2rem}
+            .hero-text p{font-size:1.1rem}
+            .hero-image{width:280px;height:280px;border-radius:20px}
+            .hero{padding:2.5rem 5%}
+            .features,.program,.contact{padding:4rem 5%}
+            .section-header{margin-bottom:3rem}
+            .section-header h2{font-size:2rem}
+            .section-header p{font-size:1rem}
+            .feature-card{padding:2rem}
+            .feature-icon{width:60px;height:60px;font-size:1.7rem}
+            .program-visual{padding:2rem}
+            .program-visual h3{font-size:1.7rem;margin-bottom:1.5rem}
+            .stats{gap:1.5rem}
+            .stat-number{font-size:1.8rem}
+            .stat-label{font-size:.85rem}
+            .contact-content h2{font-size:2rem}
+            .contact-content>p{font-size:1.05rem;margin-bottom:2rem}
+            .contact-methods{gap:1rem}
+            .contact-item{padding:1.2rem 1.5rem;width:100%;max-width:400px}
+            .contact-item span{font-size:1rem}
+            .btn{padding:.9rem 2rem;font-size:1rem}
+            .program-item{padding:1.2rem}
+            .program-item h4{font-size:1.15rem}
+        }
+
+        /* Grand téléphone */
+        @media(max-width:600px){
+            header{padding:.8rem 4%}
+            .logo{font-size:1.3rem;gap:10px}
+            .logo-icon{width:42px;height:42px}
+            .hero{margin-top:70px;padding:2rem 4%}
+            .hero-text h1{font-size:1.9rem;margin-bottom:1rem}
+            .hero-text p{font-size:1rem;margin-bottom:2rem;line-height:1.7}
+            .hero-image{width:240px;height:240px;border-radius:18px}
+            .cta-buttons{flex-direction:column;width:100%}
+            .cta-buttons .btn{width:100%;text-align:center}
+            .features,.program,.contact{padding:3rem 4%}
+            .features-grid{grid-template-columns:1fr;gap:1.5rem}
+            .feature-card{padding:1.8rem}
+            .feature-card h3{font-size:1.25rem}
+            .feature-card p{font-size:.95rem}
+            .section-header h2{font-size:1.8rem}
+            .section-header p{font-size:.95rem}
+            .section-header{margin-bottom:2.5rem}
+            .program-content{gap:2.5rem}
+            .program-item{padding:1.1rem;margin-bottom:.8rem}
+            .program-item h4{font-size:1.1rem}
+            .program-item p{font-size:.9rem}
+            .program-visual{padding:1.8rem;border-radius:20px}
+            .program-visual h3{font-size:1.5rem;margin-bottom:1.2rem}
+            .stats{grid-template-columns:1fr 1fr;gap:1rem}
+            .stat-item{padding:1rem}
+            .stat-number{font-size:1.6rem}
+            .stat-label{font-size:.8rem}
+            .contact-content h2{font-size:1.8rem;margin-bottom:1rem}
+            .contact-content>p{font-size:1rem;margin-bottom:2rem}
+            .contact-methods{flex-direction:column;align-items:center;gap:1rem}
+            .contact-item{width:100%;max-width:100%;text-align:center}
+            footer{padding:2rem 4%}
+            footer p{font-size:.85rem}
+        }
+
+        /* Petit téléphone */
+        @media(max-width:400px){
+            header{padding:.7rem 3%}
+            .logo{font-size:1.1rem;gap:8px}
+            .logo-icon{width:38px;height:38px}
+            .logo small{font-size:.55em!important}
+            .hero{margin-top:62px;padding:1.5rem 3%}
+            .hero-text h1{font-size:1.6rem;margin-bottom:.8rem}
+            .hero-text p{font-size:.9rem;margin-bottom:1.5rem}
+            .hero-image{width:200px;height:200px;border-radius:15px}
+            .features,.program,.contact{padding:2.5rem 3%}
+            .features-grid{grid-template-columns:1fr}
+            .feature-card{padding:1.5rem}
+            .feature-icon{width:55px;height:55px;font-size:1.5rem;margin-bottom:1rem;border-radius:12px}
+            .feature-card h3{font-size:1.15rem;margin-bottom:.5rem}
+            .feature-card p{font-size:.9rem;line-height:1.7}
+            .section-header h2{font-size:1.5rem}
+            .section-header p{font-size:.9rem}
+            .section-header{margin-bottom:2rem}
+            .program-item{padding:1rem}
+            .program-item h4{font-size:1rem}
+            .program-item p{font-size:.85rem}
+            .program-visual{padding:1.5rem;border-radius:15px}
+            .program-visual h3{font-size:1.3rem;margin-bottom:1rem}
+            .stats{grid-template-columns:1fr;gap:.8rem}
+            .stat-item{padding:.8rem}
+            .stat-number{font-size:1.4rem}
+            .stat-label{font-size:.75rem}
+            .contact-content h2{font-size:1.5rem}
+            .contact-content>p{font-size:.9rem}
+            .contact-item{padding:1rem 1.2rem}
+            .contact-item strong{font-size:.8rem}
+            .contact-item span{font-size:.9rem}
+            .btn{padding:.8rem 1.5rem;font-size:.95rem}
+            footer p{font-size:.8rem}
+        }
+
+        /* Très petit écran */
+        @media(max-width:320px){
+            .hero-text h1{font-size:1.4rem}
+            .hero-text p{font-size:.85rem}
+            .hero-image{width:170px;height:170px}
+            .section-header h2{font-size:1.3rem}
+            .feature-card{padding:1.2rem}
+            .feature-card h3{font-size:1.05rem}
+            .program-visual h3{font-size:1.1rem}
+            .contact-content h2{font-size:1.3rem}
+            .stat-number{font-size:1.2rem}
+        }
+
+        .scroll-reveal{opacity:0;transform:translateY(30px);transition:all .8s ease-out}
+        .scroll-reveal.active{opacity:1;transform:translateY(0)}
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#accueil" class="logo">
+                <div class="logo-icon">
+                    <img src="./logo.jpeg" alt="SyntaxLab Logo">
+                </div>
+                <span>SyntaxLab<br><small style="font-size:.6em;opacity:.8">ACADEMY</small></span>
+            </a>
+            <button class="burger" onclick="document.querySelector('.nav-links').classList.toggle('active')" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#formation">Formation</a></li>
+                <li><a href="#programme">Programme</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Maîtrisez les bases du <span class="highlight">Développement Web</span> & de la virtualisation Linux</h1>
+                <p>Formation professionnelle complète basée sur les techniques informatiques modernes. Développez vos compétences et lancez votre carrière dans le digital.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Contactez-nous</a>
+                    <a href="#programme" class="btn btn-secondary">Découvrir le programme</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image">
+                    <img src="./logo2.jpeg" alt="SyntaxLab Academy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formations -->
+    <section class="features scroll-reveal" id="formation">
+        <div class="section-header">
+            <h2>Nos Formations</h2>
+            <p>Trois parcours complets pour bâtir des compétences solides en informatique</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">💻</div>
+                <h3>Bases Solides de l'Informatique</h3>
+                <p>Maîtrisez les fondamentaux essentiels : fonctionnement d'un ordinateur, systèmes d'exploitation, réseaux, sécurité et outils bureautiques professionnels.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Bases du Développement Web</h3>
+                <p>Apprenez à créer des sites web modernes avec HTML, CSS et JavaScript. Découvrez les bases des frameworks et la mise en ligne de vos projets.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🐧</div>
+                <h3>Bases de Linux avec VMware</h3>
+                <p>Installez et configurez Linux dans un environnement virtuel VMware. Apprenez les commandes essentielles, la gestion des fichiers et l'administration système.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programme -->
+    <section class="program scroll-reveal" id="programme">
+        <div class="section-header">
+            <h2>Notre Programme de Formation</h2>
+            <p>Un cursus structuré couvrant toutes les bases pour devenir autonome en informatique</p>
+        </div>
+        <div class="program-content">
+            <ul class="program-list">
+                <li class="program-item">
+                    <h4>🖥️ Fondamentaux Informatiques</h4>
+                    <p>Architecture, systèmes d'exploitation, réseaux et sécurité de base</p>
+                </li>
+                <li class="program-item">
+                    <h4>🌐 Développement Web</h4>
+                    <p>HTML, CSS, JavaScript et initiation aux frameworks modernes</p>
+                </li>
+                <li class="program-item">
+                    <h4>🐧 Linux & VMware</h4>
+                    <p>Installation, lignes de commande, gestion système et virtualisation</p>
+                </li>
+                <li class="program-item">
+                    <h4>🚀 Projets Pratiques</h4>
+                    <p>Mise en application sur des projets réels et concrets</p>
+                </li>
+            </ul>
+            <div class="program-visual">
+                <h3>Formation Intensive</h3>
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Formations proposées</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Des cours</span>
+                        <span class="stat-label"> pratiques</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">plusieurs</span>
+                        <span class="stat-label">Projets réels</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <span class="stat-label">Taux de réussite</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact scroll-reveal" id="contact">
+        <div class="contact-content">
+            <h2>Contactez-nous !</h2>
+            <p>Prêt à commencer votre parcours ? Rejoignez SyntaxLab Academy aujourd'hui.</p>
+            <div class="contact-methods">
+                <div class="contact-item">
+                    <strong>📧 Email</strong>
+                    <span>deviskanga51@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <strong>📱 Téléphone</strong>
+                    <span>+2250788144655</span>
+                </div>
+                <div class="contact-item">
+                    <strong>📍 Localisation</strong>
+                    <span>Treichville, Abidjan, Côte d'Ivoire</span>
+                </div>
+            </div>
+            <a href="https://wa.me/+2250788144655" class="btn btn-primary">Envoyer un message</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 SyntaxLab Academy. Tous droits réservés. | Formation Informatique, Web & Linux </p>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active') });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                const t = document.querySelector(a.getAttribute('href'));
+                if(t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
